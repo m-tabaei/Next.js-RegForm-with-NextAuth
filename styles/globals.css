@@ -120,6 +120,7 @@ h1{
   border: none;
   border-radius: 5px;
   padding: 20px;
+  margin: 5px;
   color: white;
   font-size: 1rem;
   outline: none;
@@ -173,7 +174,11 @@ h4 {
   margin-top: 20px;
   padding: 5px;
 }
-
+.customer-page{
+  width: 25%;
+  height: inherit;
+  margin: 0 auto;
+}
 .customer-page__buttons {
   display: flex;
   justify-content: space-between;
@@ -197,6 +202,15 @@ h4 {
   border: 3px solid #8af1aa;
   border-radius: 5px;
   font-weight: bold;
+  font-size: 1.1rem;
+  padding: 10px 30px;
+  cursor: pointer;
+}
+.customer-page__buttons .third {
+  color:  white;
+  background-color: black;
+  font-weight: bold;
+  border: none;
   font-size: 1.1rem;
   padding: 10px 30px;
   cursor: pointer;
