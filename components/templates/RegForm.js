@@ -1,16 +1,23 @@
-import Link from "next/link";
-import styles from "../../styles/Home.module.css";
+import { useSession } from "next-auth/react";
+import  Link  from 'next/link';
+
 function RegForm() {
+  const { status } = useSession();
+  
   return (
-    <div className={styles.container}>
+    <div >
+    {status === "unauthenticated" ? (
+      <>
+        <button>
+          <Link href="/signin">Register/Login</Link>
+        </button>
+      </>
+    ) : null}
       <h1>RegForm</h1>
-      <button>
-        <Link href="/signin">Register/Login</Link>
-      </button>
-     
-     
+   
     </div>
   );
-}
+};
+
 
 export default RegForm;
