@@ -1,5 +1,6 @@
 import { signOut, useSession } from "next-auth/react";
 import styles from "../../styles/Home.module.css";
+import Link from "next/link";
 
 function Layout({ children }) {
   const { status } = useSession();
@@ -12,9 +13,20 @@ function Layout({ children }) {
       <header className="header">
         <div className={styles.container}>
           <h1>CRM Emperial.Co</h1>
-        
+
           {status === "authenticated" ? (
-            <button onClick={logOutHandler}>LogOut</button>
+            <>
+              <button>
+                <Link href="/">Home</Link>
+              </button>
+              <button>
+                <Link href="/dashboard">Dashbord</Link>
+              </button>
+              <button onClick={logOutHandler}>LogOut</button>
+              <button>
+                <Link href="/profile">Profile</Link>
+              </button>
+            </>
           ) : null}
         </div>
       </header>

@@ -27,9 +27,9 @@ function SignIn() {
   };
 
   return (
-    <div className="customer-page">
+    <div className="form-input">
       <h4>Login CRM Emperial</h4>
-      <div className="form-input">
+      <div className="">
         <div>
           <input
             type="text"
@@ -40,7 +40,7 @@ function SignIn() {
         </div>
         <div>
           <input
-            type="text"
+            type="password"
             placeholder="Password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}

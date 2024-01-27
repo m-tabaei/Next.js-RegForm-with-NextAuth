@@ -1,9 +1,13 @@
 import { getSession } from "next-auth/react";
-import { redirect } from "next/dist/server/api-utils";
+
 
 function Dashboard() {
-  return <div>Dashboard</div>;
-}
+ 
+
+
+  return (
+    <div>Dashboard</div>
+  )}
 
 export default Dashboard;
 

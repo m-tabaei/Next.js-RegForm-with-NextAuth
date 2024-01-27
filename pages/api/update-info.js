@@ -1,8 +1,7 @@
+import { getSession } from "next-auth/react";
 import connectDB from "../../utils/connectDB";
 import User from "../../models/User";
-import { verifyToken } from "../../utils/auth";
-import { verifyPassword } from "../../utils/auth";
-import { getSession } from "next-auth/react";
+import {verifyPassword } from "../../utils/auth"
 
 async function handler(req, res) {
   if (req.method !== "POST") return;
@@ -18,23 +17,13 @@ async function handler(req, res) {
 
   const { name, lastName, password } = req.body;
   const session = await getSession({ req });
-  const secretKey = process.env.SECRET_KEY;
-
-  if (!token) {
+  if (!session) {
     return res
       .status(401)
-      .json({ status: "failed", message: "User not logged in" });
+      .json({ status: "faild", message: "You are not Login!" });
   }
 
-  const result = verifyToken(token, secretKey);
-
-  if (!result) {
-    return res
-      .status(401)
-      .json({ status: "failed", message: "User not authorized" });
-  }
-
-  const user = await User.findOne({ email: result.email });
+  const user = await User.findOne({ email: session.user.email });
 
   if (!user) {
     return res
@@ -43,7 +32,6 @@ async function handler(req, res) {
   }
 
   const isValid = await verifyPassword(password, user.password);
-
   if (!isValid) {
     return res
       .status(422)
@@ -52,13 +40,13 @@ async function handler(req, res) {
 
   user.name = name;
   user.lastName = lastName;
-  user.markModified("name"); 
+  user.markModified("name");
   user.markModified("lastName");
   await user.save();
 
   res.status(200).json({
     status: "success",
-    data: { name, lastName, email: result.email },
+    data: { name, lastName, email: session.user.email },
   });
 }
 

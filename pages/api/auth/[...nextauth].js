@@ -1,6 +1,8 @@
 import connectDB from "./../../../utils/connectDB";
 import NextAuth from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
+import GitHubProvider from "next-auth/providers/github";
+
 import User from "./../../../models/User";
 import { verifyPassword } from "../../../utils/auth";
 
@@ -25,6 +27,11 @@ const authOptions = {
         return { email };
       },
     }),
+          GitHubProvider({
+        clientId: process.env.GITHUB_ID,
+        clientSecret: process.env.GITHUB_SECRET
+      })
+    
   ],
 };
 export default NextAuth(authOptions);
